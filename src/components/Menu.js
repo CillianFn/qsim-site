@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBIcon, MDBContainer } from 'mdbreact';
+import { MDBNavbar, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink } from 'mdbreact';
 
 class Menu extends Component {
   constructor(props) {
@@ -20,24 +20,25 @@ class Menu extends Component {
     return (
       <div>
           <header>
-            <MDBNavbar color="default-color" dark expand="md">
-              <MDBNavbarBrand href="/">
-                <strong>Cillian</strong>
-              </MDBNavbarBrand>
+            <MDBNavbar expand="md" dark style={{width : "100vw"}}>
               <MDBNavbarToggler onClick={this.onClick} />
               <MDBCollapse isOpen={this.state.collapse} navbar>
-                <MDBNavbarNav left>
-                  <MDBNavItem active>
-                    <MDBNavLink to="/">Home</MDBNavLink>
+              
+              <MDBNavbarNav left>
+                  <MDBNavItem>
+                    <MDBNavLink to="/"><b>ABOUT ME</b></MDBNavLink>
+                  </MDBNavItem>
+              </MDBNavbarNav>
+             
+                <MDBNavbarNav right>
+                  <MDBNavItem>
+                    <MDBNavLink to="/résumé"><b>RÉSUMÉ</b></MDBNavLink>
                   </MDBNavItem>
                   <MDBNavItem>
-                    <MDBNavLink to="/blog">Blog</MDBNavLink>
+                    <MDBNavLink style={{marginLeft: "0.5rem", marginRight: "0.5rem"}} to="/blog"><b>BLOG</b></MDBNavLink>
                   </MDBNavItem>
                   <MDBNavItem>
-                    <MDBNavLink to="/Projects">Projects</MDBNavLink>
-                  </MDBNavItem>
-                  <MDBNavItem>
-                    <MDBNavLink to="/résumé">Résumé</MDBNavLink>
+                    <MDBNavLink to="/projects"><b>PROJECTS</b></MDBNavLink>
                   </MDBNavItem>
                 </MDBNavbarNav>
               </MDBCollapse>
