@@ -7,18 +7,18 @@ const Résumé = () =>{
     <div>
       <MDBContainer>
         <MDBRow>
-          <MDBCol lg="4">
+          <MDBCol lg="3">
           </MDBCol>
 
-          <MDBCol>
-            <MDBCard className="card-body z-depth-3" style={{ marginTop: "3rem", marginLeft: "1rem", textAlign: "center"}}>
+          <MDBCol lg="6">
+            <MDBCard className="card-body z-depth-3" style={{ marginTop: "3rem", textAlign: "center"}}>
               <MDBCardText>
-                <a href={pdf} target="_blank">Click here for my pdf</a>
+                <span><h2 style={{display: "inline"}}>Find my full Résumé, <a href={pdf} target="_blank">here</a></h2></span>
               </MDBCardText>
             </MDBCard>
           </MDBCol>
               
-          <MDBCol lg="4">
+          <MDBCol lg="3">
           </MDBCol>
 
         </MDBRow>
