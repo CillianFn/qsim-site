@@ -2,7 +2,7 @@
   "name": "multi-page-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://cillianfn.me",
+  "homepage": "https://multi-page-app.heroku.com",
   "dependencies": {
     "@material-ui/core": "^3.7.1",
     "@material-ui/icons": "^3.0.1",
