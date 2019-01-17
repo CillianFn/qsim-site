@@ -32,10 +32,10 @@ class Menu extends Component {
              
                 <MDBNavbarNav right>
                   <MDBNavItem>
-                    <MDBNavLink to="/résumé"><b>RÉSUMÉ</b></MDBNavLink>
+                    <MDBNavLink to="/CV"><b>CV</b></MDBNavLink>
                   </MDBNavItem>
                   <MDBNavItem>
-                    <MDBNavLink style={{marginLeft: "0.5rem", marginRight: "0.5rem"}} to="/blog"><b>BLOG</b></MDBNavLink>
+                    <MDBNavLink style={{}} to="/blog"><b>BLOG</b></MDBNavLink>
                   </MDBNavItem>
                   <MDBNavItem>
                     <MDBNavLink to="/projects"><b>PROJECTS</b></MDBNavLink>

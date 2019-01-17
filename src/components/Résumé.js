@@ -13,7 +13,7 @@ const Résumé = () =>{
           <MDBCol lg="6">
             <MDBCard className="card-body z-depth-3" style={{ marginTop: "3rem", textAlign: "center"}}>
               <MDBCardText>
-                <span><h2 style={{display: "inline"}}>Find my full Résumé, <a href={pdf} target="_blank">here</a></h2></span>
+                <span><h2 style={{display: "inline"}}>Find my full CV, <a href={pdf} target="_blank">here</a></h2></span>
               </MDBCardText>
             </MDBCard>
           </MDBCol>

@@ -12,7 +12,7 @@ const Projects = () =>{
               <MDBCol lg="5">
                 <MDBCard className="card-body z-depth-3" style={{ marginTop: "3rem"}}>
                   <MDBCardText>
-                    <h3 className="flow-text">This website was developed using <b>React</b> and <b>MDBootstrap</b> on the frontend, and hosted using <b>Github Pages</b></h3>
+                    <h3 className="flow-text">This website was developed using <b>React</b> and <b>MDBootstrap</b> on the frontend, and hosted using <b>Netlify</b></h3>
                   </MDBCardText>
                 </MDBCard>
               </MDBCol>

@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import Home from './Home'
 import Blog from './Blog'
 import Projects from './Projects'
-import Résumé from './Résumé'
+import CV from './Résumé'
 
  
 const Content = () =>{
@@ -12,7 +12,7 @@ const Content = () =>{
       <Route exact path="/" component={Home}/>
       <Route path="/blog" component={Blog}/>
       <Route path="/projects" component={Projects}/>
-      <Route path="/résumé" component={Résumé}/>
+      <Route path="/CV" component={CV}/>
     </Switch>
   )
 }
