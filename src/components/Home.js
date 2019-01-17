@@ -13,8 +13,8 @@ class Home extends Component{
     return(
       <div>
           <MDBRow>
-            <MDBCol lg="5" xs="10">
-                <MDBContainer style={{ marginTop: "4rem",  marginLeft: "3rem", marginRight: "1.5rem"}}>
+            <MDBCol lg="5" >
+                <MDBContainer style={{ marginTop: "4rem",  marginLeft: "1rem"}}>
                     <img style={{width: "90%", height: "90%"}}
                                 src={headshot}
                                 alt="pic"

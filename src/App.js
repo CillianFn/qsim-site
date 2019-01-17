@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div className="App deep-blue-gradient" style={{height: "calc(var(--vh, 1vh) * 100)"}}>
           <Helmet>
-            <style>{'body { background-color: default; overflow-x: hidden;}'}</style>
+            <style>{'body { overflow-x: hidden; position: absolute}'}</style>
           </Helmet>
       
           {/* Renders navbar */}
@@ -18,8 +18,6 @@ class App extends Component {
           <div className="content deep-blue-gradient" >
             <Content/>
           </div>
-
-          {/* Footer */}
       </div>
     );
   }
