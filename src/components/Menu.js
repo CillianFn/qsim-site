@@ -23,28 +23,25 @@ class Menu extends Component {
             <MDBNavbar expand="md" dark style={{width : "100vw"}}>
               <MDBNavbarToggler onClick={this.onClick} />
               <MDBCollapse isOpen={this.state.collapse} navbar>
-              
+
               <MDBNavbarNav left>
                   <MDBNavItem>
-                    <MDBNavLink to="/"><b>ABOUT ME</b></MDBNavLink>
+                    <MDBNavLink to="/"><b>QSIM</b></MDBNavLink>
                   </MDBNavItem>
               </MDBNavbarNav>
-             
+
                 <MDBNavbarNav right>
                   <MDBNavItem>
-                    <MDBNavLink to="/CV"><b>CV</b></MDBNavLink>
+                    <MDBNavLink to="/visual"><b>VISUAL</b></MDBNavLink>
                   </MDBNavItem>
                   <MDBNavItem>
-                    <MDBNavLink style={{}} to="/blog"><b>BLOG</b></MDBNavLink>
-                  </MDBNavItem>
-                  <MDBNavItem>
-                    <MDBNavLink to="/projects"><b>PROJECTS</b></MDBNavLink>
+                    <MDBNavLink style={{}} to="/steps"><b>STEPS</b></MDBNavLink>
                   </MDBNavItem>
                 </MDBNavbarNav>
               </MDBCollapse>
             </MDBNavbar>
           </header>
-        
+
       </div>
     );
   }

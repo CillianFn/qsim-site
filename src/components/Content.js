@@ -1,20 +1,18 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Home from './Home'
-import Blog from './Blog'
-import Projects from './Projects'
-import CV from './Résumé'
+import Steps from './Steps'
+import Visual from './Visual'
 
- 
+
 const Content = () =>{
   return(
     <Switch>
       <Route exact path="/" component={Home}/>
-      <Route path="/blog" component={Blog}/>
-      <Route path="/projects" component={Projects}/>
-      <Route path="/CV" component={CV}/>
+      <Route path="/visual" component={Visual}/>
+      <Route path="/steps" component={Steps}/>
     </Switch>
   )
 }
- 
+
 export default Content

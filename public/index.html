@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <script src="tau-prolog.js"></script>
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta
       name="viewport"
@@ -22,20 +23,203 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Cillian Fennell</title>
+    <title>QSIM</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+          <!-- Prolog -->
+          <!-- Program -->
+          <script id="initial.pl" type="text/prolog">
+            input([x, [0, top], [[0, top], inc]]).
+            input([v, [-inf, 0, inf], [[0, inf], dec]]).
+            input([a, [], [g, std]]).
+          </script>
+          <script id="second.pl" type="text/prolog">
+            input([x, [0,top], [top,std]]).
+            input([v, [-inf,0,inf], [0,dec]]).
+            input([a, [], [g,std]]).
+          </script>
+          <script id="third.pl" type="text/prolog">
+            input([x, [0,top], [[0,top],dec]]).
+            input([v, [-inf,0,inf], [[-inf,0],dec]]).
+            input([a, [], [g,std]]).
+          </script>
+          <script id="retract.pl" type="text/prolog">
+            retractall(input(_)).
+          </script>
+          <script id="qsim.pl" type="text/prolog">
+              :-use_module(library(lists)).
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+              %Initializing Dynamic database to avoid error when asserting new facts at runtime
+              interval([[_,_],_]).
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+              %Initial States
+              % [H|T], H = variable, T = quantity state representation
+              %input([x, [0, top], [[0, top], inc]]).
+              %input([v, [-inf, 0, inf], [[0, inf], dec]]).
+              %input([a, [], [g, std]]).
+
+              % input([x, [0,top], [top,std]]).
+              % input([v, [-inf,0,inf], [0,dec]]).
+              % input([a, [], [g,std]]).
+
+              % input([x, [0,top], [[0,top],dec]]).
+              % input([v, [-inf,0,inf], [[-inf,0],dec]]).
+              % input([a, [], [g,std]]).
+
+              firstOutput(A, B) :-
+                generatePossibleTransitions([A, B]).
+
+              secondOutput(A) :-
+                generatePossibleTransitions([A]).
+
+              % Next State
+              % [[x,[top,std]],[v,[0,dec]],[a,[g,std]]]
+              % [[x,[[0,top],inc]],[v,[[0,inf],dec]],[a,[g,std]]]
+
+              %Constraints
+              constraint([deriv, x, v]).
+              constraint([deriv, v, a]).
+
+              %Conditional, calls iTransitionRules if state is in between 2 landmarks, else calls pTransitionRules
+              rules([Variable, Space, State], Xs) :-
+                ( interval(State)    %if interval call Irules else call pRules
+                -> iTransitionRules(Variable, Space, State, Xs);
+                pTransitionRules(Variable, Space, State, Xs)).
+
+              %Collecting output from Part 1 in list 'Ys'
+              generateStateTransitions(Ys) :-
+                findall(Y, (input(X), rules(X, Y)), Ys).
+              %Part 2, cross products
+              generatePossibleTransitions(FinalList) :-
+                %Generate State Transitions from Part 1 to assert stateTransition facts to the DB
+                generateStateTransitions(_),
+                %Finds list of next states for first variable of deriv constraint
+                findall([Var1,A], (stateTransition(X), constraint([Type, Var1, Var2]),
+                                variableStates(Var1, X, A)), As),
+                %Finds list of next states for second variable of deriv constraint
+                findall([Var2,B], (stateTransition(X), constraint([Type, Var1, Var2]),
+                                variableStates(Var2, X, B)), Bs),
+                %Calls cross product on pairs from List As & Bs that have the same position in the list
+                recursiveCrossProduct(As, Bs),
+                %If pairwiseFiltering rules are not true, retract fact
+                % commonConstraintVariable(_),
+                forall(possibleTransition(PTs), assertz(possibleTransitionDuplicate(PTs))),
+                %Finds all possible full states, collects them in a list, (also asserts them to DB fo)
+                findall([H1,H2,H3], (possibleTransition([H1,H2]), possibleTransitionDuplicate([H2,H3]), assertz(nextState([H1,H2,H3]))), FinalList),
+                % %DB cleanup
+                retractall(possibleTransition(_)),
+                retractall(possibleTransitionDuplicate(_)),
+                retractall(stateTransition(_)),
+                retractall(nextState(_)).
+
+              recursiveCrossProduct([],[]).
+              recursiveCrossProduct([HeadA|A], [HeadB|B]) :-
+                crossProduct(HeadA, HeadB, _),
+                recursiveCrossProduct(A, B).
+
+              %Returns a list of the cross products of two input lists X & Z
+              crossProduct(X,Y,Z) :-
+                splitCrossProduct(X,VarX,StatesX),
+                splitCrossProduct(Y,VarY,StatesY),
+                findall([A,B], (member(A,StatesX),member(B,StatesY), deriv([A,B]),
+                                     assertz(possibleTransition([[VarX, A],[VarY, B]]))) , Z).
+
+              %Splits variable and states so cross product of states can be calculated
+              splitCrossProduct([Var,States],Y,Z) :-
+                Y = Var,
+                Z = States.
+
+              commonConstraintVariable(As) :-
+                %Find common variable in constraint variableStates
+                findall([Y,Z], constraint([_, Y, Z]), [H,T]),
+                findall(A, (member(A,H),member(A,T)), As).  %A is common variable
+
+              %Finds next item in list
+              nextItem(X, Y, [First, Second|T]) :-
+                (X = First
+                -> Y = Second;
+                nextItem(X, Y, [Second|T])).
+
+              %Finds previous item in list
+              previousItem(X, Y, [First, Second|T]) :-
+                (X = Second
+                -> Y = First;
+                previousItem(X, Y, [Second|T])).
+
+              %Pass in variable, and InputList = [Variable, Space, States] and return states
+              variableStates(Variable, InputList, NextStates) :-
+                splitInput(InputList, Var, _ , NextStates),
+                Variable = Var.
+
+              % Transition rules
+              % Each rule called, returns a next state,these states are collected in a list in generateStateTransitions()
+              % Each item of this list should follow the structure set in place, Item = [Variable, Space, State]
+              % We do this as we may need reference to metadata of state in next iteration of algorithm
+
+              pTransitionRules(Variable, Space, State, Ys) :-
+                findall(Output, p(Space, State, Output), Xs),
+                Ys = [Variable, Space, Xs],
+                assertz(stateTransition(Ys)).
+
+              iTransitionRules(Variable, Space, State, Ys) :-
+                findall(Output, i(Space, State, Output), Xs),
+                Ys = [Variable, Space, Xs],
+                assertz(stateTransition(Ys)).
+
+              splitInput(Xs, Variable, Space, State) :-
+                Xs = [Variable, Space, State].
+
+
+              % Deriv rules
+              deriv([[_,inc],[ValB,_]]) :-
+                ( ValB = [H,_]     %if ValB is list, Head must be 0
+                -> H = 0;
+                    ValB > 0     %else ValB is positive
+                ).
+
+              deriv([[_,dec],[ValB,_]]) :-
+                ( ValB = [_,T]          %ValB must be negative, includes edge case of g
+                -> T = 0;
+                  ValB = g;
+                  ValB = -inf
+                ).
+
+              deriv([[_,std],[0,_]]).
+
+              %State i can go to either i, i - 1, or i + 1
+              % nextItem/previousItem used to find i - 1 or i + 1 in the quantity space list
+
+              %  ** p/i(Quantity Space List, Input State, Output State) **
+
+              % P-Transition Rules
+              p(_, [H,std], [H,std]).
+              p(X, [H1,std], [[H1,H2],inc]) :-
+                nextItem(H1, H2, X).
+              p(X, [H1,std], [[H2,H1],dec]) :-
+                previousItem(H1, H2, X).
+              p(X, [H1,inc], [[H1,H2],inc]) :-
+                nextItem(H1, H2, X).
+              p(_, [[H1,H2],inc], [[H1,H2],inc]).
+              p(X, [H1,dec], [[H2,H1],dec]) :-
+                previousItem(H1, H2, X).
+              p(_, [[H1,H2],dec], [[H1,H2],dec]).
+
+              % I Transition Rules
+              i(_, [H,std], [H,std]).
+              i(_, [[_,H2],inc], [H2,std]).
+              i(X, [[_,H2],inc], [H2, inc]) :-
+                nextItem(H2, _, X). %Rule fails if H2 is last item in list
+              i(_, [[H1,H2],inc], [[H1,H2],inc]).
+              i(_, [[H1,_],dec], [H1, std]).
+              i(X, [[H1,_],dec], [H1, dec]) :-
+                previousItem(H1, _, X). %Rule fails if H1 is first item in list
+              i(_, [[H1,H2],dec], [[H1,H2],dec]).
+          </script>
+
+          <script type="text/javascript">
+            var session = pl.create();
+          </script>
   </body>
 </html>
