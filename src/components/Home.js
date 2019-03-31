@@ -11,7 +11,7 @@ class Home extends Component{
       <div>
           <MDBRow>
             <MDBCol lg="5" >
-                <MDBContainer style={{ marginTop: "4rem",  marginLeft: "2rem"}}>
+                <MDBContainer style={{ marginTop: "7.5rem",  marginLeft: "2rem"}}>
                   <img style={{width: "90%", height: "90%"}}
                               src={nuig}
                               alt="pic"

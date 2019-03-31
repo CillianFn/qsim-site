@@ -11,6 +11,7 @@ class Visual extends Component{
   handleClick = () => {
     ReactDOM.render(
       <div>
+        <h4><strong>All States</strong></h4>
         <p style = {{marginTop: "1rem"}}>{window.initial}</p>
         <p>{window.first}</p>
         <p>{window.second}</p>
@@ -22,8 +23,7 @@ class Visual extends Component{
 
   render() {
     window.session.consult("qsim.pl");
-    window.session.consult("retract.pl")
-    window.session.consult("initial.pl")
+    window.session.consult("initial.pl");
 
     window.session.query("firstOutput(_, Initial).");
     window.session.answer(function(x){console.log(window.pl.format_answer(x));
@@ -89,6 +89,8 @@ class Visual extends Component{
                 </MDBContainer>
             </MDBCol>
           </MDBRow>
+
+
         </MDBContainer>
       </div>
     )
