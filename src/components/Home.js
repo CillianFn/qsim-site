@@ -46,7 +46,7 @@ class Home extends Component{
             <MDBContainer>
               <MDBCard className="card-body z-depth-2" style={{ marginTop: "4rem", marginRight: "1.5rem", marginLeft:"1.5rem", marginBottom:"3rem"}}>
                 <MDBCardText>
-                  <h4 className="flow-text"><strong>Visaul</strong></h4>
+                  <h4 className="flow-text"><strong>Visual</strong></h4>
                   <h4 className="flow-text">A visual representation of throwing a ball in the air. All states of the system are generated and displayed in diagrams.
                   </h4>
                 </MDBCardText>
