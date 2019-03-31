@@ -81,7 +81,7 @@ class Visual extends Component{
             </MDBCol>
             <MDBCol lg="4" >
                 <MDBContainer style={{ marginTop: "4rem", marginBottom: "3rem"}}>
-                    <img style={{width: "75%", height: "75%"}}
+                    <img style={{width: "75%", height: "75%", marginBottom: "2rem"}}
                                 src={finalPic}
                                 alt="pic"
                                 className=" z-depth-3 img-fluid float-right"
