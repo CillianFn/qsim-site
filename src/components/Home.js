@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import nuig from '../media/nuigLogo.png'
 import tauProlog from '../media/tauProlog.png'
-import { MDBRow, MDBCol, MDBCard, MDBCardText, MDBContainer, MDBIcon} from "mdbreact"
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { MDBRow, MDBCol, MDBCard, MDBCardText, MDBContainer} from "mdbreact"
 
 class Home extends Component{
 

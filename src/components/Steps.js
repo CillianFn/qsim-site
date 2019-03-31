@@ -68,75 +68,58 @@ class Steps extends Component{
 
     //Step One
     window.session.query("stepOne(A,_,_).");
-    window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                          window.stepOneA = window.pl.format_answer(x);});
+    window.session.answer(function(x){window.stepOneA = window.pl.format_answer(x);});
 
     window.session.query("stepOne(_,B,_).");
-    window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                          window.stepOneB = window.pl.format_answer(x);});
+    window.session.answer(function(x){window.stepOneB = window.pl.format_answer(x);});
 
     window.session.query("stepOne(_,_,C).");
-    window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                          window.stepOneC = window.pl.format_answer(x);});
+    window.session.answer(function(x){window.stepOneC = window.pl.format_answer(x);});
 
 
     //Step Two
    window.session.query("stepTwo(A,_,_,_,_,_,_,_,_).");
-   window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                         window.stepTwoA = window.pl.format_answer(x);});
+   window.session.answer(function(x){window.stepTwoA = window.pl.format_answer(x);});
 
    window.session.query("stepTwo(_,B,_,_,_,_,_,_,_).");
-   window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                         window.stepTwoB = window.pl.format_answer(x);});
+   window.session.answer(function(x){window.stepTwoB = window.pl.format_answer(x);});
 
    window.session.query("stepTwo(_,_,C,_,_,_,_,_,_).");
-   window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                         window.stepTwoC = window.pl.format_answer(x);});
+   window.session.answer(function(x){window.stepTwoC = window.pl.format_answer(x);});
 
    window.session.query("stepTwo(_,_,_,D,_,_,_,_,_).");
-   window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                         window.stepTwoD = window.pl.format_answer(x);});
+   window.session.answer(function(x){window.stepTwoD = window.pl.format_answer(x);});
 
    window.session.query("stepTwo(_,_,_,_,E,_,_,_,_).");
-   window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                         window.stepTwoE = window.pl.format_answer(x);});
+   window.session.answer(function(x){window.stepTwoE = window.pl.format_answer(x);});
 
    window.session.query("stepTwo(_,_,_,_,_,F,_,_,_).");
-   window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                         window.stepTwoF = window.pl.format_answer(x);});
+   window.session.answer(function(x){window.stepTwoF = window.pl.format_answer(x);});
 
    window.session.query("stepTwo(_,_,_,_,_,_,G,_,_).");
-   window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                         window.stepTwoG = window.pl.format_answer(x);});
+   window.session.answer(function(x){window.stepTwoG = window.pl.format_answer(x);});
 
    window.session.query("stepTwo(_,_,_,_,_,_,_,H,_).");
-   window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                         window.stepTwoH = window.pl.format_answer(x);});
+   window.session.answer(function(x){window.stepTwoH = window.pl.format_answer(x);});
 
    window.session.query("stepTwo(_,_,_,_,_,_,_,_,I).");
-   window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                         window.stepTwoI = window.pl.format_answer(x);});
+   window.session.answer(function(x){window.stepTwoI = window.pl.format_answer(x);});
 
     //Step Three
     window.session.query("stepThree(A,_,_,_,_).");
-    window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                          window.stepThreeA = window.pl.format_answer(x);});
+    window.session.answer(function(x){window.stepThreeA = window.pl.format_answer(x);});
 
     window.session.query("stepThree(_,B,_,_,_).");
-    window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                          window.stepThreeB = window.pl.format_answer(x);});
+    window.session.answer(function(x){window.stepThreeB = window.pl.format_answer(x);});
 
     window.session.query("stepThree(_,_,C,_,_).");
-    window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                          window.stepThreeC = window.pl.format_answer(x);});
+    window.session.answer(function(x){window.stepThreeC = window.pl.format_answer(x);});
 
     window.session.query("stepThree(_,_,_,D,_).");
-    window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                          window.stepThreeD = window.pl.format_answer(x);});
+    window.session.answer(function(x){window.stepThreeD = window.pl.format_answer(x);});
 
     window.session.query("stepThree(_,_,_,_,E).");
-    window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                          window.stepThreeE = window.pl.format_answer(x);});
+    window.session.answer(function(x){window.stepThreeE = window.pl.format_answer(x);});
 
 
 
@@ -144,12 +127,10 @@ class Steps extends Component{
     window.session.consult("qsim.pl");
 
     window.session.query("firstOutput(_, A).");
-    window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                          window.stepFourA = window.pl.format_answer(x);});
+    window.session.answer(function(x){window.stepFourA = window.pl.format_answer(x);});
 
     window.session.query("firstOutput(B, _).");
-    window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                          window.stepFourB = window.pl.format_answer(x);});
+    window.session.answer(function(x){window.stepFourB = window.pl.format_answer(x);});
 
 
 

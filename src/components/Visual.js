@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import initialPic from '../media/initialState.png'
 import intermediatePic from '../media/intermediate.png'
 import finalPic from '../media/finalState.png'
-import { MDBRow, MDBCol, MDBCard, MDBCardText, MDBContainer} from "mdbreact"
+import { MDBRow, MDBCol, MDBCard, MDBContainer} from "mdbreact"
 
 
 class Visual extends Component{
@@ -26,18 +26,15 @@ class Visual extends Component{
     window.session.consult("initial.pl");
 
     window.session.query("firstOutput(_, Initial).");
-    window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                          window.initial = window.pl.format_answer(x);});
+    window.session.answer(function(x){window.initial = window.pl.format_answer(x);});
 
     window.session.query("firstOutput(First, _).");
-    window.session.answer(function(x){console.log(window.pl.format_answer(x));
-                                          window.first = window.pl.format_answer(x);});
+    window.session.answer(function(x){window.first = window.pl.format_answer(x);});
 
     window.session.consult("retract.pl");
     window.session.consult("second.pl");
     window.session.query("secondOutput(Second).");
-    window.session.answer(function(y){console.log(window.pl.format_answer(y));
-                                          window.second = window.pl.format_answer(y);});
+    window.session.answer(function(y){window.second = window.pl.format_answer(y);});
 
 
     return(
